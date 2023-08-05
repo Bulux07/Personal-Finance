@@ -4,9 +4,9 @@ import time
 #we need a timer because google only lets us pass in information every other second 
 
 #We just change this to switch from different csv files
-MONTH = 'april'
+MONTH = 'july'
 #no need to change the file name it knows because month is being change
-file= f"chase_{MONTH}.CSV"
+file= f"bofa_{MONTH}.CSV"
 #a list of all the transactions, dates, amount and category
 transactions = []
 
@@ -17,10 +17,9 @@ def chase_fin(file):
         csv_reader = csv.reader(csv_file)
         for row in csv_reader:
             date = row[0]
-            name = row[2]
-            amount = float(row[5])
-            category = row[3]
-            transaction = ((date, name, category, amount))
+            name = row[1]
+            amount = float(row[2])
+            transaction = ((date, name, amount))
             print (transaction)
             transactions.append(transaction)
         return transactions
@@ -34,5 +33,5 @@ wks = sh.worksheet(f"{MONTH}")
 rows = chase_fin(file)
 
 for row in rows:
-    wks.insert_row([row[0],row[1],row[2],row[3]],8)
+    wks.insert_row([row[0],row[1],row[2]],8)
     time.sleep(2)
